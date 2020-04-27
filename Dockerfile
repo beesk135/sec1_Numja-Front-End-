@@ -1,12 +1,11 @@
-FROM node:latest as build-stage
+FROM node:13-alpine
 WORKDIR /app
-COPY package*.json ./
-RUN npm install --save-dev fork-ts-checker-webpack-plugin
+# install and cache app dependencies
+COPY package.json /app/package.json
 RUN npm install
+RUN npm install @vue/cli@3.7.0 -g
 COPY ./ .
-RUN yarn serve
+EXPOSE 8080
+CMD ["yarn", "serve"]# base image
 
-FROM nginx as production-stage
-RUN mkdir /app
-COPY --from=build-stage /app/dist /app
-COPY nginx.conf /etc/nginx/nginx.conf
+
