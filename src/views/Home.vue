@@ -176,7 +176,8 @@ export default class Home extends Vue {
     },
     {
       text: "verified",
-      value: "verified"
+      value: "verified",
+      sortable: false 
     },
     { text: "", value: "actions", sortable: false }
   ];
